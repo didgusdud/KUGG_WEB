@@ -1,0 +1,333 @@
+{% load static %}
+<!doctype html>
+
+<html lang ="ko">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>티어별 오브젝트 분석</title>
+    <meta name="description" content="오브젝트 분석">
+    <link rel="stylesheet" href="/static/kugg/css/objectstyle.css">
+    <link rel="icon" type="image/png" href="{% static 'kugg/ku.png' %}">
+  </head>
+  <body>
+    <div id="summoner" class="bg">
+      <header class="page-header wrapper">
+        <h1><a href="{% url 'menu_list' %}">KU.GG</a></h1>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
+            <li><a href="{% url 'object_list' %}">오브젝트 분석</a></li>
+            <li>
+              <form action="{% url 'info_list' %}" method='GET'>
+              {%csrf_token %}
+              <input type='search' name='query'>  
+              <input type='submit' value='챔피언/전적검색'>
+            </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    {% if t %}
+    
+    {% endif %}
+
+    <!-- {% if tier %}
+    <div style="color: white;  width:150px; height:30px; margin-left: 300px;"> 선택한 티어: {{tier}} </div>
+    {% endif %}
+ 
+    {% if notier %}
+    <div style="color: white;"> 선택한 티어: {{notier}} </div>
+    {% endif %} -->
+    <form action="{% url 'platinum_object_list' %}" method="get">
+    {% if t %} 
+    <span style="color: white; width:150px; height:30px; margin-left: 350px;"> 선택한 티어: {{t}} </span>
+    <input type="hidden" name="tier" value="{{t}}">
+    {% else %}
+    <input type="hidden" name="tier" value="Master">
+    {% endif %}
+
+    <select name="B/R" class="B/R" style="width:150px; height:30px; margin-left: 150px;"> 
+      <option value="">팀선택</option>
+      <option value="100">BLUE</option>
+      <option value="200">RED</option>
+      <option value="300">B&R</option>
+    </select>
+    
+    <input type="submit" value="승률예측" />
+    {% if predict_one %}
+    <span style="color: white; width:150px; height:30px; margin-left: 150px;">{{selected_team}}팀 승률: {{predict_one}} %</span>
+    {% endif %}
+    {% if predict_blue %}
+    <span style="color: white; width:150px; height:30px; margin-left: 100px;">BLUE팀 승률: {{predict_blue}} %</span>
+    <span style="color: white; width:150px; height:30px; margin-left: 20px;">RED팀 승률: {{predict_red}} %</span>
+    {% endif %}
+    {% if no_team %}
+    <span style="color: white; width:150px; height:30px; margin-left: 150px;">{{no_team}}</span>
+    {% endif %}
+    <!-- {% if predict_tmp %}
+    <p style="margin-left: 50px; color:#fff;"> {{selected_team}}팀 승률: {{predict_tmp}} % </p>
+    {% endif %} -->
+    <br>
+
+<div class="check">
+    <div style="position:relative;z-index:1;">
+      <img src="/static/kugg/map.png" width="1440px" height="950px">
+    </div>
+    <div style="position:relative;z-index:2;">
+    <input type="checkbox" name="check1" value="1">
+    <input type="checkbox" name="check2" value="1">
+    <input type="checkbox" name="check3" value="1">
+    <input type="checkbox" name="check4" value="1">
+    <input type="checkbox" name="check5" value="1">
+    <input type="checkbox" name="check6" value="1">
+    <input type="checkbox" name="check7" value="1">
+    <input type="checkbox" name="check8" value="1">
+    <input type="checkbox" name="check9" value="1">
+    <input type="checkbox" name="check10" value="1">
+    <input type="checkbox" name="check11" value="1">
+    <input type="checkbox" name="check12" value="1">
+    <input type="checkbox" name="check13" value="1">
+    <input type="checkbox" name="check14" value="1">
+    <input type="checkbox" name="check15" value="1">
+    <input type="checkbox" name="check16" value="1">
+    <input type="checkbox" name="check17" value="1">
+    <input type="checkbox" name="check18" value="1">
+    <input type="checkbox" name="check19" value="1">
+    <input type="checkbox" name="check20" value="1">
+    <input type="checkbox" name="check21" value="1">
+    <input type="checkbox" name="check22" value="1">
+    <input type="checkbox" name="check23" value="1">
+    <input type="checkbox" name="check24" value="1">
+    <input type="checkbox" name="check25" value="1">
+    <input type="checkbox" name="check26" value="1">
+    <input type="checkbox" name="check27" value="1">
+    <input type="checkbox" name="check28" value="1">
+
+    <select name="Rbaron">
+      <option value="0">R바론</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bbaron">
+      <option value="0">B바론</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bdragon1">
+      <option value="0">B바다용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bdragon2">
+      <option value="0">B바람용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bdragon3">
+      <option value="0">B대지용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bdragon4">
+      <option value="0">B화염용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bdragon5">
+      <option value="0">B장로용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rdragon1">
+      <option value="0">R바다용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rdragon2">
+      <option value="0">R바람용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rdragon3">
+      <option value="0">R대지용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rdragon4">
+      <option value="0">R화염용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rdragon5">
+      <option value="0">R장로용</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Rjeon" style="position: relative; top: -740px; left: 645px;">
+      <option value="0">R전령</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <select name="Bjeon" style="position: relative; top: -740px; left: 480px;">
+      <option value="0">B전령</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+</div>
+    <br><br><br>
+    <input type="hidden" name="hidden_flag" value="1">
+    
+    </form>
+    
+     
+    <!-- <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2020 KUGG</small></p>
+      </div>
+    </footer>
+     -->
+  </body>
+</html>

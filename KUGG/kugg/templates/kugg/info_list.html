@@ -1,0 +1,250 @@
+{% load static %}
+<!doctype html>
+<html lang ="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>소환사 정보</title>
+    <meta name="description" content="소환사 정보">
+    <link rel="stylesheet"href="/static/kugg/css/style.css">
+    <link rel="icon" type="image/png" href="{% static 'kugg/ku.png' %}">
+  </head>
+  <body>
+    <div id="summoner" class="bg">
+      <header class="page-header wrapper">
+        <h1><a href="{% url 'menu_list' %}">KU.GG</a></h1>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
+            <li><a href="{% url 'object_list' %}">오브젝트 분석</a></li>
+            <li>
+              <form action="{% url 'info_list' %}" method='GET'>
+              {%csrf_token %}
+              <input type='search' name='query' placeholder="챔피언/소환사명 검색">  
+              <input type='submit' value='챔피언/전적검색'>
+              </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+{% for i in info %}
+    <div class="Header" style="height:200px;">
+      <div class="Face" style="float:left; width: 30%; height: 200px;">
+        <div class="ProfileIcon">
+          <img src="/static/kugg/profileicon/{{i.profileIconId}}.png" alt="{{i.profileIconId}}.png Image" class="ProfileImage" width="100" height="100">
+          <span class="Level tip" title="레벨">Level {{i.summonerLevel}}</span>
+        </div>
+        <div class="Profile">
+          <div class="Information">
+            <span class="Name">{{i.sname}}</span>
+          </div>
+          <div class="Rank">
+            <div class="LadderRank">
+              <span class="ranking"></span>{{i.leaguePoints}} LP
+            </div>
+          </div>
+        </div>
+        <div class="LastUpdate">
+          "최근 업데이트 : "
+          <span class="_timeage _timeCountAssigned tip" data-datetime="" data-type data-interval="60" title="~년 ~월 ~일 오후 ~시 ~분"> {{i.revisionDate}}</span>
+        </div>
+      </div>
+
+      <!-- <div class="margin" style="float: left; width: 10%;"> </div> -->
+      <div class="SideContent" style="float:left; width: 20%; margin-right: 40%; height:136px;">
+        <div class="TierBox Box">
+          <div class="SummonerRatingMedium">
+            <div class="Medal tip" title="솔랭">
+              <img src="/static/kugg/ranked-emblems/Emblem_{{i.tier}}.png" class="Image" alt="티어사진" width="80" height="80">
+            </div>
+            <div class="TierRankInfo">
+              <div class="RankType">솔로랭크</div>
+              <div class="TierRank">{{i.tier}} {{i.srank}}</div>
+              <div class="TierInfo">
+                <span class="WinLose">
+                  <span class="wins">{{i.wins}}승</span>
+                  <span class="losses">{{i.lossers}}패</span>
+                  <br>
+                  <span class="winratio">승률 {{i.win_rate}}%</span>
+                </span>
+              </div>
+              <span class="LeaguePoints">{{i.leaguePoints}}LP</span>
+              <div class="LeagueName">아리의 주문술사들
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="margin" style="float: left; width: 10%;"> </div> -->
+
+    </div>
+
+    <div class="ContentWrap tabItems" id="SummonerLayoutContent">
+      <div class="tabItem Content SummonerLayoutContent summonerLayout-summary" data-tab-data-url="" data-tab-spinner-height="800" data-tab-is-loaded-already="true" style="display: block;">
+
+{% empty %}
+    {{username}} 해당 소환사/챔피언 정보가 없습니다
+{% endfor %}
+<br>
+<style>
+.GameItem_승리{
+  background-color: #a3cfec;
+}
+.GameItem_{{m.game_win}} {
+  background-color: #a3cfec;
+}
+/*.승리 {
+  background-color: #a3cfec;
+}*/
+</style>
+
+{% for match in match_list %}
+    {% for m in match %}
+      <div class="RealContent" style="width:100%;">
+        <div class="GameListContainer" data-summoner-id="~~~~~~~~~" data-last-info="~~~~~~~~~~``">
+          <div class="Header Box">
+            <style>
+              .SelectMatchTypes,.ChampionMatchSearchWrap>.Content {display: none;}
+            </style>
+          </div>
+          <div class="Content">
+            <div class="GameItemList">
+              <div class="GameItemWrap">
+                <div class="GameItem_{{m.game_win}}" data-summoner-id="~~~~~~~~~~" data-game-time="~~~~~~" data-game-id="~~~~~~~" data-game-result="win/lose" > 
+                  <div class="GameStats" style="float:left;width:10%;">
+                    <div class="GameType" title="솔랭">솔랭</div>
+                    <!-- <div class="TimeStamp">
+                      <span class="_timeago _timeCountAssigned tip tpd-delegation-uid-1" data-datetime="~~~~~~~~" data-type data-interval="60" title="~년 ~월 ~일 오전 ~시 ~분"> ~일 전</span>
+                    </div> -->
+                    <div class="Bar"></div>
+                    <div class="GameResult"> {{m.game_win}} </div>
+                    <div class="GameLength"> {{m.gameDurationH}}분 {{m.gameDurationS}}초</div>
+                  </div>
+                  <div class="GameSettingInfo" style="float:left;width:10%;">
+                    <div class="ChampionImage">
+                      <a target="_blank">
+                        <img src="/static/kugg/champion/{{m.champion}}.png" class="Image" width="65" height="65">
+                      </a>
+                    </div>
+                    <div class="SummonerSpell">
+                      <span class="Spell">
+                        <img src="/static/kugg/spell/summoner/{{m.spell1Id}}.png" class="Image tip tpd-delegation-uid-1" title alt="spell1">
+                      </span>
+                      <span class="Spell">
+                        <img src="/static/kugg/spell/summoner/{{m.spell2Id}}.png" class="Image tip tpd-delegation-uid-1" title alt="spell2">
+                      </span>
+                    </div>
+                    <div class="Runes">
+                      <span class="Rune">
+                        <img src="/static/kugg/rune/{{m.perkPrimaryStyle}}.png" class="Image tip tpd-delegation-uid-1" title alt="rune1">
+                        <!-- {{m.perkPrimaryStyle}} -->
+                      </span>
+                      <span class="Rune">
+                        <img src="/static/kugg/rune/{{m.perkSubStyle}}.png" class="Image tip tpd-delegation-uid-1" title alt="rune2" style="margin-left: 30px">
+                        <!-- {{m.perkSubStyle}} -->
+                      </span>
+                    </div>
+                    <div class="ChampionName">
+                      <a target="_blank" style="font-size:20px">{{m.champion}}</a>
+                    </div>
+                  </div>
+                  
+                  <div class="KDA" style="float:left; width:8%;">
+                    <div class="KDA">
+                      <span class="Kill">{{m.kills}}</span> /
+                      <span class="Death">{{m.deaths}}</span> /
+                      <span class="Assist">{{m.assists}}</span>
+                    </div>
+                    <div class="KDARatio">
+                      <span class="KDARatio"> {{m.kda}}:1</span>
+                           평점
+                    </div>
+                  </div>
+                  <div class="Stats" style="float:left;width:7%;">
+                    <div class="Level">
+                      {{m.champLevel}} Level
+                    </div>
+                    <div class="CS">
+                      <span class="CS tip tpd-delegation-uid-1" title></span>
+                       {{m.totalMinionsKilled}} CS
+                    </div>
+                    <div class="CS">
+                      <span class="CKRate tip tpd-delegation-uid-1" title></span>
+                            딜량 {{m.totalDamageDealt}}
+                    </div>
+                  </div>
+                  <div class="Items" style="float:left;width:20%;">
+                    <div class="ItemList">
+                      {% for i in m.item %}
+                      <span class="Item">
+                        <img src="/static/kugg/item/{{i}}.png" alt="{{i}}.png Image" class="Image tip tpd-delegation-uid-1" title alt="아이템1" width="64" height="64">
+                      </span>
+                      {% endfor %}
+                      <!-- <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템2">
+                      </span>
+                      <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템3">
+                      </span>
+                      <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템4">
+                      </span><br>
+                      <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템5">
+                      </span>
+                      <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템6">
+                      </span>
+                      <span class="Item">
+                        <img src="" class="Image tip tpd-delegation-uid-1" title alt="아이템7">
+                      </span> -->
+                    </div>
+                  </div>
+
+                  <div class="FollowPlayers Names" style="float:left;width:45%;">
+                    <p>pick:</p>
+                    {% for c in m.pchamp %}
+                    <img src="/static/kugg/champion/{{c}}.png" alt="{{c}}.png Image" class="Image tip tpd-delegation-uid-1" title alt="아이템1" width="64" height="64">
+                    {% endfor %}
+                    <p>ban:</p>
+                    {% for b in m.bans %}
+                    <img src="/static/kugg/champion/{{b}}.png" alt="{{b}}.png Image" class="Image tip tpd-delegation-uid-1" title alt="아이템1" width="64" height="64">
+                    {% endfor %}
+                    <!-- {% for c in m.pchamp %}
+                          <div class="Team">
+                            <div class="Summoner ">
+                              <div class="ChampionImage">
+                                <img src="/static/kugg/champion/{{c}}.png" alt="{{c}}.png Image" class="Image tip tpd-delegation-uid-1" title alt="아이템1" width="64" height="64">
+                                <div class="" title></div>
+                                <div class="" title></div>
+                              </div>
+                              <div class="SummonerName">
+                                <a class="Link" target="_blank"></a>
+                              </div>
+                            </div>
+                          </div>
+                    {% endfor %} -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="GameMoreButton Box">
+              <a href="#" onclick="$.여기 사이트.matches.list.loadMore($(this)); return false;" class="Button">더 보기</a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      {% empty %}
+        전적 결과가 없습니다.
+    {% endfor %}
+{% endfor %}
+    <!-- <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2020 KUGG</small></p>
+      </div>
+    </footer> -->
+
+  </body>
+</html>

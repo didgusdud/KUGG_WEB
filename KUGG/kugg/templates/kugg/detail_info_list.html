@@ -1,0 +1,25 @@
+{% extends "kugg/layout.html" %}
+{% block title %}
+소환사 상세분석
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+  <form class="form-inline my-2 ,my-1g-0" action="{% url 'detail_info_search' %}" method='GET'>
+    {%csrf_token %}
+    소환사명 검색: <input class="form-control mr-sm-2" type='search' name='query'>
+    <input class="btn btn-secondary my-2 my-sm-0" type='submit' value='소환사 분석'>
+  </form>
+<div> 소환사 상세분석 </div>
+<p>
+            {% for match in matches %}
+                <h4> gameId: {{ match.gameId }} </h4>
+                <h4> accountId: {{ match.accountId }} </h4>
+            {% empty %}
+                검색 결과가 없습니다.
+            {% endfor %}
+        
+        </p>
+
+{% endblock %} 

@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<style>
+
+</style>
+<html lang ="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>KU.GG</title>
+    <meta name="description" content="롤">
+    <link rel="stylesheet" href="/static/kugg/css/style.css">
+    <link rel="icon" type="image/png" href="{% static 'kugg/ku.png' %}">
+  </head>
+  <body>
+    <div id="home" class="big-bg">
+      <header class="page-header wrapper">
+        <h1><a href="{% url 'menu_list' %}">KU.GG</a></h1>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
+            <li><a href="{% url 'object_list' %}">오브젝트 분석</a></li>
+            <li>
+              <form action="{% url 'info_list' %}" method='GET'>
+              {%csrf_token %}
+              <input type='search' name='query'>  
+              <input type='submit' value='챔피언/전적검색'>
+            </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <!-- <div class="home-content wrapper">
+      <p>소환사명 : <input type = "text" placeholder="소환사명 검색">  <input type="submit" value="검색"></p>
+    </div> /.home-content-->
+
+    <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2020 KUGG</small></p>
+      </div>
+    </footer>
+
+  </body>
+</html>

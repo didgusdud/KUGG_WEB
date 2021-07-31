@@ -1,0 +1,578 @@
+@charset "UTF-8"
+html {
+  font-size: 100%;
+}
+body {
+  font-size: 100%;
+  margin-bottom: 100px;
+}
+
+body a {
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-top: 34px;
+  list-style: none;
+}
+
+.main-nav li {
+  margin-left: 36px;
+}
+
+.main-nav a {
+  color: #fff;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
+.home-content {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.home-content p {
+  font-size: 1.125rem;
+  margin: 10px 0 42px;
+}
+
+.big-bg {
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+#home {
+    background-image: url(Nocturne_0.jpg);
+    min-height: 100vh;
+}
+
+#home .page-title {
+  text-transform: none;
+}
+
+.bg {
+  background-color: #abc0ff;
+  height: 90px;
+  margin-bottom: 40px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  grid-template-rows: 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px 170px;
+}
+
+.item {
+  background: #0bd;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
+}
+
+.grid {
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(6, minmax(100px, 1fr));
+  margin-top: 6%;
+  margin-bottom: 50px;
+}
+
+.ChampionBox>.ChampionInfo {
+    display: table-cell;
+    width: 85px;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.ChampionBox>.ChampionInfo>.ChampionName {
+    width: 70px;
+    color: #555e5e;
+    font-weight: bold;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ChampionBox>.ChampionInfo>.ChampionName>a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ChampionBox>.ChampionInfo>.ChampionMinionKill {
+    margin-top: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.ChampionBox>.Face {
+    display: table-cell;
+    width: 60px;
+    padding: 5px 0 0 0;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.ChampionBox>.Face>a>.ChampionImage {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.ChampionBox>.PersonalKDA {
+    display: table-cell;
+    line-height: 1.8;
+    vertical-align: middle;
+}
+
+.ChampionBox>.PersonalKDA>.KDA {
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.ChampionBox>.PersonalKDA>.KDAEach {
+    font-size: 12px;
+    color: #879292;
+    white-space: nowrap;
+}
+
+.ChampionBox>.Played {
+    display: table-cell;
+    width: 70px;
+    line-height: 1.8;
+    vertical-align: middle;
+}
+
+.ChampionBox>.Played>.Title {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.ChampionBox>.Played>.Played, .ChampionBox>.Played>.WinRatio {
+    color: #879292;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.SummonerLayout>.Header {
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+}
+
+.SummonerLayout>.ContentWrap {
+  overflow: hidden;
+}
+
+.SummonerLayout>.ContentWrap>.Content {
+  width: 1000px;
+  min-height: 500px;
+  margin: 0 auto;
+}
+
+.SummonerLayoutContent {
+  font-size: 0;
+}
+
+.SummonerLayoutContent>.SideContent {
+  display: inline-block;
+  width: 300px;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.SummonerLayoutContent>.SideContent>.Box {
+  margin-top: 10px;
+}
+
+.SummonerRatingMedium {
+  display: table;
+  width: 100%;
+  color: #879292;
+  position: relative;
+  background-color: #f2f2f2;
+  padding: 8px 0;
+}
+
+.SummonerRatingMedium>.TierRankInfo {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.SummonerLayoutContent>.RealContent {
+  display: inline-block;
+  width: 690px;
+  margin-left: 10px;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.GameListContainer {
+  margin-top: 10px;
+}
+
+.GameListContainer>.Content {
+  position: relative;
+}
+
+.GameListContainer>.Content>.GameItemList {
+  margin-top: 8px;
+}
+
+.GameItemList>.GameItemWrap {
+  position: relative;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.Box {
+  border: 1px solid #cdd2d2;
+  box-shadow: 0 1px #dcdfdf;
+  background: #f2f2f2;
+  border-radius: 2px;
+}
+
+.GameItem {
+  position: relative;
+  background: none;
+}
+
+.GameItem>.Content {
+  display: table;
+  width: 689px;
+  border-collapse: collapse;
+  border: 1px solid #cdd2d2;
+}
+
+.GameItem>.Content>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+
+div {
+    display: block;
+}
+
+.GameItem>.Content>.GameSettingInfo {
+  width: 100px;
+  font-size: 0;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionImage {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionImage>a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionImage .Image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+img {
+  border: 0;
+}
+
+.GameItem>.Content>.GameSettingInfo>.SummonerSpell>.Spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.GameItem>.Content>.GameSettingInfo>.SummonerSpell>.Spell:first-child {
+    margin-left: 0;
+}
+
+.GameItem>.Content>.GameSettingInfo>.SummonerSpell>.Spell>.Image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.GameItem>.Content>.GameSettingInfo>.SummonerSpell {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.GameItem>.Content>.GameSettingInfo>.Runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.GameItem>.Content>.GameSettingInfo>.Runes>.Rune {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+
+.GameItem>.Content>.GameSettingInfo>.Runes>.Rune:first-child {
+    margin-top: 0;
+}
+
+.GameItem>.Content>.GameSettingInfo>.Runes>.Rune:first-child>.Image {
+    background: #000;
+}
+.GameItem>.Content>.GameSettingInfo>.Runes>.Rune>.Image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionName {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.GameItem>.Content>.GameStats {
+  width: 70px;
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  line-height: 16px;
+}
+
+.GameItem>.Content>.GameStats>.GameType {
+    font-weight: bold;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.GameItem>.Content>.KDA {
+    font-size: 11px;
+    text-align: center;
+}
+
+.GameItem>.Content>.KDA>.KDA {
+    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Kill,
+.GameItem>.Content>.KDA>.KDA>.Assist {
+    color: #555e5e;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Death {
+    color: #c6443e;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Kill,
+.GameItem>.Content>.KDA>.KDA>.Death,
+.GameItem>.Content>.KDA>.KDA>.Assist {
+    font-weight: bold;
+}
+
+.GameItem>.Content>.KDA>.KDARatio {
+    color: #555e5e;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.GameItem>.Content>.KDA>.KDARatio .KDARatio {
+    color: #353a3a;
+}
+
+.GameItem>.Content>.Stats {
+    width: 90px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #555e5e;
+}
+
+.GameItem>.Content>.Stats>.CKRate {
+    color: #c6443e;
+}
+
+.GameItem>.Content>div {
+  display: table-cell;
+  height: 96px;
+  vertical-align: middle;
+}
+
+.GameItem>.Content>.GameStats>.GameType {
+  font-weight: bold;
+  width: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.GameItem>.Content>.GameStats>.Bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cdd2d2;
+}
+
+.GameItem>.Content>.GameStats>.GameResult {
+    font-weight: bold;
+}
+
+.GameItem>.Content>.Items {
+    font-size: 0;
+}
+
+.GameItem>.Content>.Items .ItemList {
+    width: 96px;
+    margin: 0 auto;
+}
+
+.GameItem.Lose>.Content>.Items>.ItemList>.Item {
+    background-color: #cea7a7;
+}
+
+.GameItem>.Content>.Items .Item>.Image {
+    width: 100%;
+    height: 100%;
+}
+
+.GameItem>.Content>.FollowPlayers {
+    width: 170px;
+    font-size: 0;
+}
+
+.GameItem>.Content>.FollowPlayers.Names>.Team {
+    float: left;
+    width: 50%;
+}
+
+.GameItem>.Content>.FollowPlayers.Names>.Team>.Summoner {
+    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.GameItem>.Content>.FollowPlayers.Names>.Team>.Summoner>.ChampionImage {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.GameItem.Lose>.Content {
+  table-layout: fixed;
+  background-color: #e2b6b3;
+  border-color: #cea7a7;
+}
+
+.GameItem.Lose>.Content>.GameStats>.Bar {
+    background: #cea7a7;
+}
+
+.GameItem.Lose>.Content>.GameStats>.GameResult {
+    color: #c6443e;
+}
+
+.GameItem.Win>.Content {
+    table-layout: fixed;
+    background-color: #a3cfec;
+    border-color: #99b9cf;
+}
+
+.GameItem.Win>.Content>.GameStats>.Bar {
+    background: #99b9cf;
+}
+
+.GameItem.Win>.Content>.GameStats>.GameResult {
+    color: #1a78ae;
+}
+
+.l-champion-index-content .l-champion-index-content--main {
+    float: left;
+    width: 605px;
+    background-color: #f9f9fa;
+    border: solid 1px #e9eff4;
+    border-right: none;
+    box-sizing: border-box;
+}
+
+.champion-list-filter {
+    background-color: #fff;
+    border-bottom: solid 1px #e9eff4;
+}
+
+.champion-list-filter__type {
+    float: left;
+    margin-left: 20px;
+}
+
+.champion-list-filter__type__item {
+    display: inline-block;
+}
+
+.champion-list-filter__type__item--active a {
+    font-weight: bold;
+    color: #4990e2;
+    border-bottom-color: #4990e2;
+}
+
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+  background-color: #432;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer p {
+  color: #fff;
+  font-size: 0.875rem;
+}

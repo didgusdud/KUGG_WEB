@@ -1,0 +1,230 @@
+{% load static %}
+<!doctype html>
+<html lang ="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>챔피언 선택</title>
+    <meta name="description" content="챔피언 분석">
+    <link rel="stylesheet" href="/static/kugg/css/style.css">
+    <link rel="icon" type="image/png" href="{% static 'kugg/ku.png' %}">
+  </head>
+  <body>
+    <div id="summoner" class="bg">
+      <header class="page-header wrapper">
+        <h1><a href="{% url 'menu_list' %}">KU.GG</a></h1>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
+            <li><a href="{% url 'object_list' %}">오브젝트 분석</a></li>
+            <li>
+              <form action="{% url 'info_list' %}" method='GET'>
+              {%csrf_token %}
+              <input type='search' name='query'>  
+              <input type='submit' value='챔피언/전적검색'>
+            </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <div class="wrapper">
+      <h2 class="page-title">검색한 챔피언: {{selected_champ}}</h2>
+      <div>
+      <img src="/static/kugg/champion/{{selected_champ}}.png" alt="{{champ}} Image" width="100" height="100">
+      <h1>  </h1>
+      <div>
+      {% for i in item_tree %} 
+      <div class="itemTree">
+        <p><h3>추천 아이템 트리 :</h3></p>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item0}}.png" alt="추천 아이템1"><br>
+          {{i.item0name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item1}}.png" alt="추천 아이템2"><br>
+          {{i.item1name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item2}}.png" alt="추천 아이템3"><br>
+          {{i.item2name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item3}}.png" alt="추천 아이템4"><br>
+          {{i.item3name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item4}}.png" alt="추천 아이템5"><br>
+          {{i.item4name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.7%; height:100px;">
+          <img src="/static/kugg/item/{{i.item5}}.png" alt="추천 아이템6"><br>
+          {{i.item5name}}
+        </div>
+      </div>
+      {% endfor %}
+
+      <form action="{% url 'champion_analysis' %}" method="get">
+      <select name = "티어" style="width:140px; height:20px;">
+        <option value="Master">티어를 선택하세요</option>
+        <!-- <option value="Platinum">플래티넘</option>
+        <option value="Diamond">다이아</option> -->
+        <option value="Master">Master</option>
+        <option value="Grandmaster">Grandmaster</option>
+        <option value="Challenger">Challenger</option>
+      </select>
+      <select name = "라인" style="width:140px; height:20px;">
+        <option value="TOP">라인을 선택하세요</option>
+        <option value="TOP">TOP</option>
+        <option value="JUNGLE">JUG</option>
+        <option value="MIDDLE">MID</option>
+        <option value="DUO_CARRY">AD</option>
+        <option value="DUO_SUPPORT">SUP</option>
+      </select>
+
+      <input type="submit" value="챔피언 분석" />
+      <br><br>
+
+      <!-- <img src="/static/kugg/item/3111.png" alt="헤르메스의 발걸음 Image" width="50" height="50">
+      <img src="/static/kugg/item/3117.png" alt="기동력의 장화 Image" width="50" height="50">
+      <img src="/static/kugg/item/3006.png" alt="광전사의 군화 Image" width="50" height="50">
+      <img src="/static/kugg/item/3047.png" alt="닌자의 신발 Image" width="50" height="50"> -->
+      <select name="item0" style="width:140px; height:20px;">
+        <option value="3111">신발</option>
+        <option value="3111">헤르메스의 발걸음</option>
+        <option value="3117">기동력의 장화</option>
+        <option value="3006">광전사의 군화</option>
+        <option value="3047">닌자의 신발</option>
+      </select>
+      <select name="item1"style="width:140px; height:20px;">
+        <option value="3026">방어구</option>
+        <option value="3026">수호천사</option>
+        <option value="3143">란두인의 예언</option>
+        <option value="3065">정령의 형상</option>
+        <option value="3068">태양불꽃망토</option>
+      </select>
+      <select name="item2"style="width:140px; height:20px;">
+        <option value="3071">ad무기</option>
+        <option value="3071">칠흑의 양날도끼</option>
+        <option value="3072">피바라기</option>
+        <option value="3153">몰락한왕의검</option>
+        <option value="3031">무한의 대검</option>
+      </select>
+      <select name="item3"style="width:140px; height:20px;">
+        <option value="3089">ap무기</option>
+        <option value="3089">라바돈의 죽음모자</option>
+        <option value="3157">존야의모래시계</option>
+        <option value="3078">삼위일체</option>
+        <option value="3151">리안드리의 고통</option>
+      </select>
+      <select name="item4"style="width:140px; height:20px;">
+        <option value="3109">서폿템</option>
+        <option value="3109">기사의맹세</option>
+        <option value="3107">구원</option>
+        <option value="3222">미카엘의 도가니</option>
+        <option value="3193">가고일 돌갑옷</option>
+      </select>
+      <select name="item5"style="width:140px; height:20px;">
+        <option value="1401">정글템</option>
+        <option value="1401">사브르:잿불거인</option>
+        <option value="1413">검:잿불거인</option>
+        <option value="1402">사브르:룬메아리</option>
+        <option value="1414">검:룬메아리</option>
+      </select>
+      <br>
+
+      <select name="op_item0"style="width:140px; height:20px;">
+        <option value="3111">상대신발</option>
+        <option value="3111">헤르메스의 발걸음</option>
+        <option value="3117">기동력의 장화</option>
+        <option value="3006">광전사의 군화</option>
+        <option value="3047">닌자의 신발</option>
+      </select>
+
+      <!-- <img src="/static/kugg/item/3026.png" alt="수호천사 Image" width="50" height="50">
+      <img src="/static/kugg/item/3143.png" alt="란두인의 예언 Image" width="50" height="50">
+      <img src="/static/kugg/item/3065.png" alt="정령의 형상 Image" width="50" height="50">
+      <img src="/static/kugg/item/3068.png" alt="태양불꽃망토 Image" width="50" height="50"> -->
+
+      <select name="op_item1"style="width:140px; height:20px;">
+        <option value="3026">상대방어구</option>
+        <option value="3026">수호천사</option>
+        <option value="3143">란두인의 예언</option>
+        <option value="3065">정령의 형상</option>
+        <option value="3068">태양불꽃망토</option>
+      </select>
+      <!-- <img src="/static/kugg/item/3071.png" alt="칠흑의 양날도끼 Image" width="50" height="50">
+      <img src="/static/kugg/item/3072.png" alt="피바라기 Image" width="50" height="50">
+      <img src="/static/kugg/item/3153.png" alt="몰락한왕의검 Image" width="50" height="50">
+      <img src="/static/kugg/item/3031.png" alt="무한의 대검 Image" width="50" height="50"> -->
+
+      <select name="op_item2"style="width:140px; height:20px;">
+        <option value="3071">상대ad무기</option>
+        <option value="3071">칠흑의 양날도끼</option>
+        <option value="3072">피바라기</option>
+        <option value="3153">몰락한왕의검</option>
+        <option value="3031">무한의 대검</option>
+      </select>
+      <!-- <img src="/static/kugg/item/3089.png" alt="라바돈의 죽음모자 Image" width="50" height="50">
+      <img src="/static/kugg/item/3157.png" alt="존야의모래시계 Image" width="50" height="50">
+      <img src="/static/kugg/item/3078.png" alt="삼위일체 Image" width="50" height="50">
+      <img src="/static/kugg/item/3151.png" alt="리안드리의 고통 Image" width="50" height="50"> -->
+
+
+      <select name="op_item3"style="width:140px; height:20px;">
+        <option value="3089">상대ap무기</option>
+        <option value="3089">라바돈의 죽음모자</option>
+        <option value="3157">존야의모래시계</option>
+        <option value="3078">삼위일체</option>
+        <option value="3151">리안드리의 고통</option>
+      </select>
+
+      <!-- <img src="/static/kugg/item/3109.png" alt="기사의맹세 Image" width="50" height="50">
+      <img src="/static/kugg/item/3107.png" alt="구원 Image" width="50" height="50">
+      <img src="/static/kugg/item/3222.png" alt="미카엘의 도가니 Image" width="50" height="50">
+      <img src="/static/kugg/item/3193.png" alt="가고일 돌갑옷 Image" width="50" height="50"> -->
+
+
+      <select name="op_item4"style="width:140px; height:20px;">
+        <option value="3109">상대서폿템</option>
+        <option value="3109">기사의맹세</option>
+        <option value="3107">구원</option>
+        <option value="3222">미카엘의 도가니</option>
+        <option value="3193">가고일 돌갑옷</option>
+      </select>
+      <!-- <img src="/static/kugg/item/1401.png" alt="기사의맹세 Image" width="50" height="50">
+      <img src="/static/kugg/item/1413.png" alt="구원 Image" width="50" height="50">
+      <img src="/static/kugg/item/1402.png" alt="미카엘의 도가니 Image" width="50" height="50">
+      <img src="/static/kugg/item/1414.png" alt="가고일 돌갑옷 Image" width="50" height="50"> -->
+
+      <select name="op_item5"style="width:140px; height:20px;">
+        <option value="1401">상대정글템</option>
+        <option value="1401">사브르:잿불거인</option>
+        <option value="1413">검:잿불거인</option>
+        <option value="1402">사브르:룬메아리</option>
+        <option value="1414">검:룬메아리</option>
+      </select>
+      <br><br><br><br>
+      {% for champ in champ_list %}  <!-- champ_list는 챔피언 이름 리스트 -->
+        <div class="champion-list" style="float:left;">
+        <div class="champ" style="height:auto; min-height: 100px; width: 250px; overflow: auto; padding:">
+        <img src="/static/kugg/champion/{{champ}}.png" alt="{{champ}} Image" width="100" height="100">
+        <br>
+        <input type="hidden" name="내챔피언" value="{{selected_champ}}">
+        <input type="radio" name="상대챔피언" value="{{champ}}">상대챔피언
+      </div>
+    </div>
+      {% endfor %}
+
+  
+</form>
+</div>
+      
+<br><br><br><br><br><br>
+  <!-- <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2020 KUGG</small></p>
+      </div>
+    </footer> -->
+  </body>
+</html>

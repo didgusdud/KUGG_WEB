@@ -1,0 +1,204 @@
+{% load static %}
+
+<!doctype html>
+<html lang ="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>챔피언 분석</title>
+    <meta name="description" content="롤">
+    <link rel="stylesheet" href="/static/kugg/css/style.css">
+    <link rel="icon" type="image/png" href="{% static 'kugg/ku.png' %}">
+  </head>
+  <body>
+    <div id="summoner" class="bg">
+      <header class="page-header wrapper">
+        <h1><a href="{% url 'menu_list' %}">KU.GG</a></h1>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
+            <li><a href="{% url 'object_list' %}">오브젝트 분석</a></li>
+            <li>
+              <form action="{% url 'info_list' %}" method='GET'>
+              {%csrf_token %}
+              <input type='search' name='query'>  
+              <input type='submit' value='챔피언/전적검색'>
+            </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <br><br>
+
+    <div class="content" style="margin-left:30px;">
+      <div class="chosenTier">
+    
+        <p><h3>선택한 티어 : {{tier}} <img src="/static/kugg/ranked-emblems/Emblem_{{tier}}.png" alt="티어사진" width="100" height="100"></h3></p>
+        <br>
+      </div>
+      <div class="chosenLine">
+        <p><h3>선택한 라인 : {{line}}</h3></p><br>
+      </div>
+      <div class="vs">
+        <div class="myChamp" style="float: left; width:25%; height:200px;">
+          <img src="/static/kugg/champion/{{my_champ}}.png" alt="내 챔피언 사진" width="150" height="150"><br>
+          내 챔피언[{{my_champ}}]
+        </div>
+        <div class="vs" style="float:left; width:30%; height:200px;">
+          <img src="/static/kugg/vs.png" alt="vs">
+        </div>
+        <div class="enemyyChamp" style="float:left; width:45%; height:200px;">
+          <img src="/static/kugg/champion/{{op_champ}}.png" alt="상대 챔피언 사진" width="150" height="150"><br>
+          상대 챔피언[{{op_champ}}]
+        </div>
+      </div>
+
+      <div class="winRatio">
+        <h3>상대승률 : {{relative_wr}}%</h3>
+      </div>
+      
+      <hr noshade size="1">
+      {% for i in item_tree %} 
+      <div class="itemTree">
+        <p><h3>{{my_champ}}의 추천 아이템 트리 :</h3></p>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item0}}.png" alt="추천 아이템1"><br>
+          {{i.item0name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item1}}.png" alt="추천 아이템2"><br>
+          {{i.item1name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item2}}.png" alt="추천 아이템3"><br>
+          {{i.item2name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item3}}.png" alt="추천 아이템4"><br>
+          {{i.item3name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item4}}.png" alt="추천 아이템5"><br>
+          {{i.item4name}}/
+        </div>
+        <div class="recommendedItem" style="float:left; width:16.7%; height:100px;">
+          <img src="/static/kugg/item/{{i.item5}}.png" alt="추천 아이템6"><br>
+          {{i.item5name}}
+        </div>
+      </div>
+      {% endfor %}
+
+
+    <hr noshade size="1">
+    <div> <h3>{{my_champ}}의 추천 룬 트리</h3> </div>
+      <div> 
+        {% for r in rune_tree %}
+          <span> {{r}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        {% endfor %}
+      </div>
+
+    <hr noshade size="1">
+    <div> <h3>{{my_champ}}의 카운터 챔피언</h3> </div>
+      <div>
+        {% for c in counter %}
+          <div>{{c.champion}} {{c.win_rate}}% </div>
+        {% endfor %}
+      </div>
+
+    
+    <hr noshade size="1">
+      {% if flag_item %}
+      <div class="winRatio">
+        <h3>아이템 시뮬레이션 승률 : {{item_win_rate}}%</h3>
+      </div>
+      <div class="myItem">
+        <p>내 아이템 :</p>
+        {% for i in my_item %}  
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item0}}.png" alt="내 아이템1"><br>
+        {{i.item0name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item1}}.png" alt="내 아이템1"><br>
+        {{i.item1name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item2}}.png" alt="내 아이템1"><br>
+        {{i.item2name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item3}}.png" alt="내 아이템1"><br>
+        {{i.item3name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item4}}.png" alt="내 아이템1"><br>
+        {{i.item4name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item5}}.png" alt="내 아이템1"><br>
+        {{i.item5name}}
+        </div>   
+        
+        {% endfor %}
+      </div>
+      <div class="enemyItem">
+        <p>상대 아이템 :</p>
+        {% for i in op_item %} 
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item0}}.png" alt="내 아이템1"><br>
+        {{i.item0name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item1}}.png" alt="내 아이템1"><br>
+        {{i.item1name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item2}}.png" alt="내 아이템1"><br>
+        {{i.item2name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item3}}.png" alt="내 아이템1"><br>
+        {{i.item3name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item4}}.png" alt="내 아이템1"><br>
+        {{i.item4name}}
+        </div>   
+        <div class="myItem" style="float:left; width:16.66%; height:100px;">
+          <img src="/static/kugg/item/{{i.item5}}.png" alt="내 아이템1"><br>
+        {{i.item5name}}
+        </div>
+        {% endfor %}
+        <!-- <div class="enemyItem" style="float:left; width:16.66%; height:100px;">
+          <img src="" alt="상대 아이템2"><br>
+          상대 아이템 이름
+        </div>
+        <div class="enemyItem" style="float:left; width:16.66%; height:100px;">
+          <img src="" alt="상대 아이템3"><br>
+          상대 아이템 이름
+        </div>
+        <div class="enemyItem" style="float:left; width:16.66%; height:100px;">
+          <img src="" alt="상대 아이템4"><br>
+          상대 아이템 이름
+        </div>
+        <div class="enemyItem" style="float:left; width:16.66%; height:100px;">
+          <img src="" alt="상대 아이템5"><br>
+          상대 아이템 이름
+        </div>
+        <div class="enemyItem" style="float:left; width:16.7%; height:100px;">
+          <img src="" alt="상대 아이템6"><br>
+          상대 아이템 이름
+        </div> -->
+      </div>
+
+      {% endif %}
+    </div>
+
+    <!-- <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2020 KUGG</small></p>
+      </div>
+    </footer> -->
+
+  </body>
+</html>
